@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your one-stop shop for Terramon products">
+  <title>{% block title %}TCG Shop{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+  <header id="header">
+    <a href="/" class="logo">TCG Shop</a>
+  </header>
+  <section id="subheader">
+    <div class="cart">
+      Your cart is empty.
+    </div>
+  </section>
+  <main id="content">
+    {% block content %}
+    {% endblock %}
+  </main>
+  <footer>
+    <p>&copy; 2024 TCG Shop. All rights reserved.</p>
+    <p>This project is inspired by <em>TCG Card Simulator</em>. This is a fan-made project and is not affiliated with or endorsed by the creators of TCG Card Simulator.</p>
+  </footer>
+</body>
+</html>
