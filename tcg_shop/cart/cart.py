@@ -7,15 +7,18 @@ from shop.models import Product
 class Cart:
     def __init__(self, request):
         self.session = request.session
-        self.cart = self.session.setdefault(settings.CART_SESSION_ID, {})
+        cart = self.session.get(settings.CART_SESSION_ID)
+        if not cart:
+            cart = self.session[settings.CART_SESSION_ID] = {}
+        self.cart = cart
 
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
-
-        for item in self.cart.values():
-            product = next(p for p in products if p.id == int(item['product_id']))
-            item['product'] = product
+        cart = self.cart.copy()
+        for product in products:
+            cart[str(product.id)]['product'] = product
+        for item in cart.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
             yield item
@@ -28,15 +31,12 @@ class Cart:
         if product_id not in self.cart:
             self.cart[product_id] = {
                 'quantity': 0,
-                'price': Decimal(product.price),
-                'product_id': product_id
+                'price': str(product.price),
             }
-        
         if override_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
-        
         self.save()
 
     def save(self):
