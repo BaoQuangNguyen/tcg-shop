@@ -207,6 +207,63 @@
     margin-bottom: 1rem;
   }
   
+  .product-detail form input[type="submit"] {
+    background-color: var(--secondary-color); /* Bright pink */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-detail form input[type="submit"]:hover {
+    background-color: var(--primary-color); /* Deep purple */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-detail form input[type="submit"]:active {
+    background-color: var(--accent-color); /* Bright blue */
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-detail form label {
+    font-size: 1.1rem; /* Slightly larger font size */
+    font-weight: bold; /* Make it bold */
+    color: var(--primary-color); /* Deep purple */
+    margin-bottom: 0.5rem; /* Space between label and dropdown */
+    
+    text-transform: uppercase; /* Optional: Make the text uppercase */
+    letter-spacing: 1px; /* Optional: Add some spacing between letters */
+  }
+  
+  .product-detail form select {
+    background-color: var(--background-color); /* Light gray */
+    color: var(--text-color); /* Dark blue-gray */
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--accent-color); /* Bright blue */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.2s ease;
+    margin-bottom: 1rem; /* Adds space below the dropdown */
+  }
+  
+  .product-detail form select:focus {
+    border-color: var(--primary-color); /* Deep purple */
+    box-shadow: 0 0 6px var(--primary-color);
+    outline: none;
+  }
+  
+  .product-detail form select:hover {
+    border-color: var(--secondary-color); /* Bright pink */
+  }
+
   /* Footer Styles */
   footer {
     background-color: var(--primary-color);

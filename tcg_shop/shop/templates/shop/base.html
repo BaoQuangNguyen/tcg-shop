@@ -12,6 +12,12 @@
 <body>
   <header id="header">
     <a href="/" class="logo">TCG Shop</a>
+    <nav>
+      <ul>
+        <li><a href="{% url 'shop:product_list' %}">Categories</a></li>
+        <li><a href="{% url 'cart:cart_detail' %}">Cart</a></li>
+      </ul>
+    </nav>
   </header>
   <section id="subheader">
     <div class="cart">
