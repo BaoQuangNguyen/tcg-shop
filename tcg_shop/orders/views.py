@@ -20,7 +20,7 @@ def order_create(request):
                     quantity=item['quantity'],
                 )
             cart.clear()
-            order_created.delay(order.id)
+            order_created.delay_on_commit(order.id)
             return render(
                 request,
                 'orders/order/created.html',

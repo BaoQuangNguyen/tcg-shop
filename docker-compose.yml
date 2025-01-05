@@ -23,4 +23,13 @@ services:
       - ./.env
     depends_on:
       - db
+      - rabbitmq
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.13.1-management  # Using the same version as in the command
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # AMQP protocol
+      - "15672:15672"  # Web management UI
     restart: always
