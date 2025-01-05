@@ -1,20 +1,26 @@
 services:
   db:
-    image: postgres
+    image: postgres:16.2
+    container_name: tcg_shop_db
     volumes:
       - ./data/db:/var/lib/postgresql/data
     env_file:
       - ./.env
-      
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "5432:5432"
+    restart: always
+
+  app:
+    build:
+      context: .
+    container_name: tcg_shop_app
+    command: python tcg_shop/manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./tcg_shop:/code
-    working_dir: /code
+      - .:/app
     ports:
       - "8000:8000"
     env_file:
       - ./.env
     depends_on:
       - db
+    restart: always
