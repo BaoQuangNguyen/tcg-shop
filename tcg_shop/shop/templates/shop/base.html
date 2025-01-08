@@ -28,14 +28,14 @@
           <li>
             <a href="{% url 'shop:product_list' %}" 
                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 
-                      drop-shadow-2xl transition-all duration-300 ease-in-out hover:animate-bounce hover:text-white">
+                      drop-shadow-2xl transition-all duration-300 ease-in-out hover:text-white">
               Categories
             </a>
           </li>
           <li>
             <a href="{% url 'cart:cart_detail' %}" 
                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 
-                      drop-shadow-2xl transition-all duration-300 ease-in-out hover:animate-bounce hover:text-white">
+                      drop-shadow-2xl transition-all duration-300 ease-in-out hover:text-white">
               Cart
             </a>
           </li>
@@ -47,7 +47,7 @@
         {% with total_items=cart|length %}
           {% if total_items > 0 %}
             <a href="{% url 'cart:cart_detail' %}" 
-               class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 hover:text-white">
+               class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 hover:text-white transform hover:scale-110">
               Cart: {{ total_items }} item{{ total_items|pluralize }}, ${{ cart.get_total_price }}
             </a>
           {% elif not order %}
@@ -61,7 +61,7 @@
   </header>
 
   <!-- Main Content Section: Contains the main page content -->
-  <main id="content" class="bg-gradient-to-r from-gray-800 via-black to-gray-800 text-white p-8 shadow-inner min-h-screen">
+  <main id="content" class="bg-gradient-to-r from-gray-800 via-black to-gray-800 text-white p-8 shadow-inner min-h-[100vh]">
     {% block content %}
     {% endblock %}
   </main>

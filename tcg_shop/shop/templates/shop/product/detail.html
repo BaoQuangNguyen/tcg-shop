@@ -6,20 +6,79 @@
 {% endblock %}
 
 {% block content %}
-  <div class="product-detail">
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="{{ product.name }}">
-    <h1>{{ product.name }}</h1>
-    <h2>
-      <a href="{{ product.category.get_absolute_url }}">
-        {{ product.category }}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="rounded-xl shadow-lg overflow-hidden">
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        <!-- Image Section -->
+        <div class="relative">
+          <div class="aspect-w-1 aspect-h-1 rounded-xl overflow-hidden border-2 border-pink-500" style="box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);">
+            <img 
+              src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" 
+              alt="{{ product.name }}"
+              class="w-full h-full object-cover"
+            >
+          </div>
+        </div>
+
+        <!-- Product Info Section -->
+        <div class="flex flex-col space-y-6">
+          <!-- Category Link -->
+          <a 
+            href="{{ product.category.get_absolute_url }}" 
+            class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 hover:text-white transition-colors duration-200"
+          >
+            {{ product.category }}
+          </a>
+
+          <!-- Product Name -->
+          <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">
+            {{ product.name }}
+          </h1>
+
+          <!-- Price -->
+          <div class="flex items-center space-x-2">
+            <span class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">${{ product.price }}</span>
+          </div>
+
+          <!-- Description -->
+          <div class="prose prose-lg max-w-none text-gray-600">
+            {{ product.description|linebreaks }}
+          </div>
+
+          <!-- Add to Cart Form -->
+          <form action="{% url 'cart:cart_add' product.id %}" method="post" class="mt-6">
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-2">
+                <label for="{{ cart_product_form.quantity.id_for_label }}" class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">Quantity:</label>
+                {{ cart_product_form.quantity }}
+              </div>
+              {% csrf_token %}
+              <button 
+                type="submit" 
+                class="px-8 py-3 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-bold rounded-lg 
+                       shadow-lg hover:from-pink-600 hover:to-yellow-600 transition-all duration-200 
+                       transform hover:scale-105"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Products Link -->
+    <div class="mt-8 ml-8">
+      <a 
+        href="{% url 'shop:product_list' %}" 
+        class="inline-flex items-center text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 hover:text-white transition-colors duration-200 transform hover:scale-110"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Products
       </a>
-    </h2>
-    <p class="price">${{ product.price }}</p>
-    {{ product.description|linebreaks }}
-    <form action="{% url 'cart:cart_add' product.id %}" method="post">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <input type="submit" value="Add to cart" class="button">
-    </form>
+    </div>
   </div>
 {% endblock %}

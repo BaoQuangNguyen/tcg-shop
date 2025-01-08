@@ -33,13 +33,13 @@
       </h1>
       <div class="flex flex-wrap justify-start gap-6">
         {% for product in products %}
-          <div class="item flex-shrink-0 w-64 border-2 border-pink-500 p-4 rounded-lg shadow-lg h-80" style="box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);">
+          <div class="item flex-shrink-0 w-64 border-2 border-pink-500 p-4 rounded-lg shadow-lg h-80 transform hover:scale-105" style="box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);">
             <a href="{{ product.get_absolute_url }}" class="block h-48 mb-4">
               <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" 
                    class="w-full h-full object-cover rounded">
             </a>
-            <a href="{{ product.get_absolute_url }}" class="block text-xl font-semibold hover:text-pink-500 truncate">{{ product.name }}</a>
-            <span class="block text-lg font-bold text-pink-500 mt-2">${{ product.price }}</span>
+            <a href="{{ product.get_absolute_url }}" class="block text-xl font-semibold text-transparent bg-clip-text text-amber-500 truncate">{{ product.name }}</a>
+            <span class="block text-lg font-bold text-transparent bg-clip-text text-rose-600 mt-2">${{ product.price }}</span>
           </div>
         {% endfor %}
       </div>
